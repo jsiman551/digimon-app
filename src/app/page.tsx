@@ -1,45 +1,41 @@
-import DigimonCard from "@/components/digimon-card/digimonCard";
-import Navbar from "@/components/navbar";
-import { api_base } from "@/consts";
+import StoreProvider from './storeProvider';
+import DigimonCard from '@/components/digimon-card/digimonCard';
+import Navbar from '@/components/navbar';
+import { api_base } from '@/consts';
+import { RootState } from '@/lib/store';
 
-export default async function Home() {
-
-  //rederize page on server side
+async function fetchDigimons(): Promise<RootState['digimons']> {
   const res = await fetch(`${api_base}/api/digimon`, {
-    next: { revalidate: 3600 }, // ISR per hour.
+    next: { revalidate: 3600 }, // ISR por hora
   });
   const digimons = await res.json();
+  return digimons;
+}
+
+export default async function Home() {
+  const initialDigimons = await fetchDigimons();
 
   return (
-    <main>
-      {/*menu with logo and search input*/}
-      <Navbar />
-      {/*initial message that push user to start searching for digimons*/}
-      <div className="text-center bg-base-100 mt-24">
-        <p className="text-2xl">
-          Comienza a buscar tu digimon favorito para
-          comenzar a buscar informacion sobre el mismo.
-        </p>
-      </div>
-      {/*card with information about searched digimon*/}
-      <div className="divider divider-primary p-4" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-        {digimons.map((digimon: { name: string, img: string, level: string }, index: string) => {
-          const {
-            name,
-            img,
-            level
-          } = digimon;
-          return (
+    <StoreProvider initialState={{ digimons: initialDigimons }}>
+      <main>
+        <Navbar />
+        <div className="text-center bg-base-100 mt-24">
+          <p className="text-2xl">
+            Busca tu digimon favorito.
+          </p>
+        </div>
+        <div className="divider divider-primary p-4" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+          {initialDigimons.map((digimon: { name: string; img: string; level: string }, index: string) => (
             <DigimonCard
               key={index}
-              name={name}
-              img={img}
-              level={level}
+              name={digimon.name}
+              img={digimon.img}
+              level={digimon.level}
             />
-          )
-        })}
-      </div>
-    </main >
+          ))}
+        </div>
+      </main>
+    </StoreProvider>
   );
 }

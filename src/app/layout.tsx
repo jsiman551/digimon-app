@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import StoreProvider from "./storeProvider";
 import "../styles/globals.css";
 
 //load roboto font
@@ -28,7 +29,9 @@ export default function RootLayout({
       <body
         className={`${roboto.className} bg-base-100 max-w-screen-xl mx-auto`}
       >
-        {children}
+        <StoreProvider>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
