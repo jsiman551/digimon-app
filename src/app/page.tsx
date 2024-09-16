@@ -1,5 +1,4 @@
 import DigimonCard from "@/components/digimon-card/digimonCard";
-import EmptyState from "@/components/empty-state";
 import Navbar from "@/components/navbar";
 import { api_base } from "@/consts";
 
@@ -16,10 +15,12 @@ export default async function Home() {
       {/*menu with logo and search input*/}
       <Navbar />
       {/*initial message that push user to start searching for digimons*/}
-      <EmptyState
-        description="Comienza a buscar tu digimon favorito para 
-        comenzar a buscar informacion sobre el mismo."
-      />
+      <div className="text-center bg-base-100 mt-24">
+        <p className="text-2xl">
+          Comienza a buscar tu digimon favorito para
+          comenzar a buscar informacion sobre el mismo.
+        </p>
+      </div>
       {/*card with information about searched digimon*/}
       <div className="divider divider-primary p-4" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
