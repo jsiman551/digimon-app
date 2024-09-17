@@ -21,7 +21,9 @@ const Navbar = () => {
 
     //it will listen to digimon level selector
     useEffect(() => {
-        router.push(`/?level=${digimonLevel}`)
+        if (digimonLevel) {
+            router.push(`/?level=${digimonLevel}`)
+        }
     }, [digimonLevel])
 
     return (
