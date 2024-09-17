@@ -16,3 +16,6 @@ This is a Next.js application built using the latest features, including the `ap
   - `/api/digimon/name/:name`
   - `/api/digimon/level/:level`
 
+## Live URL
+
+- [Online Demo](https://digimon-app-henna.vercel.app/)

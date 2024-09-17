@@ -47,7 +47,19 @@ const Navbar = () => {
                     <option value="level">Level</option>
                 </select>
                 {searchOption != "level" ? <label className="input input-bordered flex items-center gap-2 input-primary">
-                    <input ref={inputRef} disabled={!searchOption} type="text" className="grow" placeholder="Buscar" />
+                    <input
+                        onKeyDown={e => {
+                            if (e.key === "Enter") {
+                                onClickFilter(e)
+                            }
+                            return false;
+                        }}
+                        ref={inputRef}
+                        disabled={!searchOption}
+                        type="text"
+                        className="grow"
+                        placeholder="Buscar"
+                    />
                     <button role="button" onClick={(e) => onClickFilter(e)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
