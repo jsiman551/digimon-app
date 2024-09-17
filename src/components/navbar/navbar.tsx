@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -9,7 +10,7 @@ const Navbar = () => {
     const [searchOption, setSearchOption] = useState<string>("");
     // choose level digimon option
     const [digimonLevel, setDigimonLevel] = useState<string>("");
-    //input reference
+    // input reference
     const inputRef = useRef<HTMLInputElement>(null);
 
     //function to filter by name
@@ -26,14 +27,14 @@ const Navbar = () => {
     return (
         <div className="navbar flex-col sm:flex-row">
             <div className="flex-1">
-                <a className="btn">
+                <Link href="/">
                     <Image
                         src="svg/the_digimon_logo.svg"
                         alt="Digimon Wiki Logo"
-                        width={150}
-                        height={150}
+                        width={200}
+                        height={200}
                     />
-                </a>
+                </Link>
             </div>
             <div className="flex-none mt-3 sm:mt-0">
                 <select
