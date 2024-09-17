@@ -11,7 +11,7 @@ const MainContent = () => {
             <Navbar />
             <div className="text-center bg-base-100 mt-24">
                 <p className="text-2xl">
-                    Busca tu digimon favorito.
+                    Busca tu digimon favorito
                 </p>
             </div>
             <div className="divider divider-primary p-4" />

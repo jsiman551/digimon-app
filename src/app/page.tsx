@@ -1,18 +1,15 @@
 import MainContent from '@/components/main-content';
 import StoreProvider from './storeProvider';
-import { api_base } from '@/consts';
-import { DigimonType } from '@/types';
+import { fetchDigimons } from '@/api/digimons';
 
-async function fetchDigimons(): Promise<DigimonType[]> {
-  const res = await fetch(`${api_base}/api/digimon`, {
-    next: { revalidate: 3600 }, // ISR por hora
-  });
-  const digimons = await res.json();
-  return digimons;
-}
-
-export default async function Home() {
-  const initialDigimons = await fetchDigimons();
+export default async function Home({ searchParams }: { searchParams: { name?: string; level?: string } }) {
+  //get filters
+  const filter = {
+    name: searchParams.name,
+    level: searchParams.level,
+  };
+  //fetch data
+  const initialDigimons = await fetchDigimons(filter);
 
   return (
     <StoreProvider initialState={initialDigimons}>

@@ -1,12 +1,20 @@
 "use client"
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
 const Navbar = () => {
+    const router = useRouter();
     // choose search option
     const [searchOption, setSearchOption] = useState<string>("");
-    //select reference
-    const selectRef = useRef<HTMLSelectElement>(null);
+    //input reference
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const onClickFilter = (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        router.push(`/?${searchOption}=${inputRef.current?.value}`)
+    }
+
     return (
         <div className="navbar flex-col sm:flex-row">
             <div className="flex-1">
@@ -21,18 +29,17 @@ const Navbar = () => {
             </div>
             <div className="flex-none mt-3 sm:mt-0">
                 <select
-                    onChange={() => setSearchOption(selectRef.current?.value ?? "")}
-                    ref={selectRef}
                     className="select select-primary w-full max-w-xs mr-4"
                     defaultValue=""
+                    onChange={(e) => setSearchOption(e.target.value)}
                 >
                     <option disabled value="">Buscar Digimon Por:</option>
-                    <option value="name">Nombre:</option>
-                    <option value="level">Level:</option>
+                    <option value="name">Nombre</option>
+                    <option value="level">Level</option>
                 </select>
                 <label className="input input-bordered flex items-center gap-2 input-primary">
-                    <input disabled={!searchOption} type="text" className="grow" placeholder="Buscar" />
-                    <button role="button">
+                    <input ref={inputRef} disabled={!searchOption} type="text" className="grow" placeholder="Buscar" />
+                    <button role="button" onClick={(e) => onClickFilter(e)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"
