@@ -1,26 +1,20 @@
+import { DigimonType } from '@/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Define el tipo de estado para los digimons
-interface Digimon {
-    name: string;
-    img: string;
-    level: string;
-}
-
 interface DigimonState {
-    digimons: Digimon[];
+    result: DigimonType[];
 }
 
 const initialState: DigimonState = {
-    digimons: [],
+    result: [],
 };
 
 const digimonSlice = createSlice({
     name: 'digimons',
     initialState,
     reducers: {
-        setDigimons(state, action: PayloadAction<Digimon[]>) {
-            state.digimons = action.payload;
+        setDigimons(state, action: PayloadAction<DigimonType[]>) {
+            state.result = action.payload;
         },
     },
 });

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import digimonReducer from './features/digimonSlice'; // Ajusta la ruta según tu estructura
+import digimonReducer from './features/digimonSlice';
 
 export const makeStore = () => {
     return configureStore({
