@@ -10,13 +10,15 @@ export default async function Home({ searchParams }: { searchParams: { name?: st
   };
 
   let initialDigimons: DigimonType[] | undefined = [];
-  let errorMessage = null;
+  let errorMessage: string | undefined = undefined;;
 
   try {
     // Fetch data
     initialDigimons = await fetchDigimons(filter);
-  } catch (error: any) {
-    errorMessage = error.message || 'Failed to fetch digimons';
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      errorMessage = error.message || 'Failed to fetch digimons';
+    }
   }
 
   return (
