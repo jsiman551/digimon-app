@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} bg-base-100 max-w-screen-xl mx-auto`}
+        className={`${roboto.className} bg-gray-200 dark:bg-base-100 min-h-screen`}
       >
         <StoreProvider>
           {children}

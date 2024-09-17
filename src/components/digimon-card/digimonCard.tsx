@@ -18,7 +18,7 @@ const DigimonCard = ({ name, level, img }: Props) => (
         </figure>
         <div className="card-body">
             <h2 className="card-title mx-auto text-accent text-xl">{name}</h2>
-            <p className="text-center">Level: <span className="text-accent font-medium">{level}</span></p>
+            <p className="text-center text-white">Level: <span className="text-accent font-medium">{level}</span></p>
         </div>
     </div>
 )

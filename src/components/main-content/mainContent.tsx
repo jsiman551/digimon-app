@@ -10,11 +10,11 @@ const MainContent = () => {
     const notFoundDigimonError = useAppSelector((state) => state.digimons.error);
 
     return (
-        <main className="py-10">
+        <main className="py-10 max-w-screen-xl mx-auto">
             <Navbar />
-            <div className="text-center bg-base-100 mt-24">
+            <div className="text-center dark:bg-base-100 mt-24">
                 <p
-                    className={`text-2xl ${notFoundDigimonError ? "text-warning" : "text-accent"}`}
+                    className={`text-2xl ${notFoundDigimonError ? "text-red-900 dark:text-warning" : "dark:text-accent"}`}
                     dangerouslySetInnerHTML={{
                         __html: notFoundDigimonError
                             ? underlineFirstWord(notFoundDigimonError || "")
