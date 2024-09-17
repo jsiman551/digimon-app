@@ -1,19 +1,27 @@
 "use client"
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
     const router = useRouter();
     // choose search option
     const [searchOption, setSearchOption] = useState<string>("");
+    // choose level digimon option
+    const [digimonLevel, setDigimonLevel] = useState<string>("");
     //input reference
     const inputRef = useRef<HTMLInputElement>(null);
 
+    //function to filter by name
     const onClickFilter = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        router.push(`/?${searchOption}=${inputRef.current?.value}`)
+        router.push(`/?name=${inputRef.current?.value}`)
     }
+
+    //it will listen to digimon level selector
+    useEffect(() => {
+        router.push(`/?level=${digimonLevel}`)
+    }, [digimonLevel])
 
     return (
         <div className="navbar flex-col sm:flex-row">
@@ -37,7 +45,7 @@ const Navbar = () => {
                     <option value="name">Nombre</option>
                     <option value="level">Level</option>
                 </select>
-                <label className="input input-bordered flex items-center gap-2 input-primary">
+                {searchOption != "level" ? <label className="input input-bordered flex items-center gap-2 input-primary">
                     <input ref={inputRef} disabled={!searchOption} type="text" className="grow" placeholder="Buscar" />
                     <button role="button" onClick={(e) => onClickFilter(e)}>
                         <svg
@@ -51,9 +59,22 @@ const Navbar = () => {
                                 clipRule="evenodd" />
                         </svg>
                     </button>
-                </label>
+                </label> : <select
+                    className="select select-primary w-full max-w-xs mr-4"
+                    defaultValue=""
+                    onChange={(e) => setDigimonLevel(e.target.value)}
+                >
+                    <option disabled value="">Selecciona:</option>
+                    <option value="fresh">Fresh</option>
+                    <option value="in training">In Training</option>
+                    <option value="rookie">Rookie</option>
+                    <option value="champion">Champion</option>
+                    <option value="ultimate">Ultimate</option>
+                    <option value="armor">Armor</option>
+                    <option value="mega">Mega</option>
+                </select>}
             </div>
-        </div>
+        </div >
     )
 }
 

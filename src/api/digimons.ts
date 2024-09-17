@@ -4,23 +4,24 @@ import { DigimonType } from "@/types";
 export const fetchDigimons = async (filter?: { name?: string; level?: string }): Promise<DigimonType[]> => {
     let url = `${api_base}/api/digimon`;
 
-    //change url depending on filter selection
+    // Change URL depending on filter selection
     if (filter?.name) {
-        // by name
+        // By name
         url = `${api_base}/api/digimon/name/${filter.name}`;
     } else if (filter?.level) {
-        // by level
+        // By level
         url = `${api_base}/api/digimon/level/${filter.level}`;
     }
 
-
-    const digimons = await fetch(url, {
+    const response = await fetch(url, {
         next: { revalidate: 3600 }, // ISR por hora
     });
 
-    if (!digimons.ok) {
-        throw new Error('Failed to fetch digimons');
+    if (!response.ok) {
+        const errorData = await response.json();
+        const errorMessage = errorData.ErrorMsg || 'Failed to fetch digimons';
+        throw new Error(errorMessage);
     }
 
-    return digimons.json();
+    return response.json();
 }

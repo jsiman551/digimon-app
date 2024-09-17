@@ -6,12 +6,13 @@ import { useAppSelector } from '@/lib/hooks';
 
 const MainContent = () => {
     const initialDigimons = useAppSelector((state) => state.digimons.result);
+    const notFoundDigimonError = useAppSelector((state) => state.digimons.error);
     return (
         <main>
             <Navbar />
             <div className="text-center bg-base-100 mt-24">
                 <p className="text-2xl">
-                    Busca tu digimon favorito
+                    {notFoundDigimonError || "Busca tu digimon favorito"}
                 </p>
             </div>
             <div className="divider divider-primary p-4" />
