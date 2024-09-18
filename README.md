@@ -8,6 +8,7 @@ This is a Next.js application built using the latest features, including the `ap
 - **TypeScript**: The project is applied with TypeScript to ensure type safety and good JavaScript practices.
 - **Server-Side Rendering (SSR) and ISR**: Generates HTML from the server and revalidates information every hour.
 - **Redux Toolkit**: Used for state management and handling data via storage.
+- **Jest Tests**: Used for testing components.
 
 ## API Documentation
 
